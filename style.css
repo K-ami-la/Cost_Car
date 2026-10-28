@@ -1,0 +1,73 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: #222;
+}
+
+.voitures {
+  display: flex;
+  gap: 20px;
+}
+
+section {
+  flex: 1;
+  background: #f4f6f8;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#resultat {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+
+
+
+/* 🆕 Le badge de la voiture gagnante */
+section {
+  position: relative;
+}
+
+section.gagnante {
+  outline: 3px solid #16a34a;
+}
+
+section.gagnante::after 
+{
+  content: "🏆 Moins chère";
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: #16a34a;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+}
