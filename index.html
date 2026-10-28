@@ -7,59 +7,84 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 🆕 Une voiture dessinée en SVG (un dessin fait avec du code) -->
-  <svg class="voiture-dessin" viewBox="0 0 200 80" width="200">
-    <path d="M20 55 L30 35 Q35 28 45 28 L120 28 Q130 28 140 38 L160 50 Q180 52 182 58 L182 62 L18 62 Z" fill="#2563eb"/>
-    <path d="M48 34 L118 34 Q124 34 130 42 L45 42 Z" fill="#bfdbfe"/>
-    <circle cx="55" cy="62" r="11" fill="#222"/>
-    <circle cx="55" cy="62" r="5" fill="#ccc"/>
-    <circle cx="145" cy="62" r="11" fill="#222"/>
-    <circle cx="145" cy="62" r="5" fill="#ccc"/>
-  </svg>
 
-  <h1>Quelle voiture me coûte vraiment le moins cher ?</h1>
+  <!-- Bandeau du haut -->
+  <header class="hero">
+    <svg class="voiture-dessin" viewBox="0 0 200 80" width="180" aria-hidden="true">
+      <path d="M20 55 L30 35 Q35 28 45 28 L120 28 Q130 28 140 38 L160 50 Q180 52 182 58 L182 62 L18 62 Z" fill="#ffffff"/>
+      <path d="M48 34 L118 34 Q124 34 130 42 L45 42 Z" fill="#93c5fd"/>
+      <circle cx="55" cy="62" r="11" fill="#0f172a"/>
+      <circle cx="55" cy="62" r="5" fill="#cbd5e1"/>
+      <circle cx="145" cy="62" r="11" fill="#0f172a"/>
+      <circle cx="145" cy="62" r="5" fill="#cbd5e1"/>
+    </svg>
+    <h1>Quelle voiture me coûte vraiment le moins cher ?</h1>
+    <p>Comparez deux voitures sur leur coût total : achat + énergie, année après année.</p>
+  </header>
 
-  <section>
-    <h2>Mes trajets</h2>
-    <label>Kilomètres par an <input type="number" id="km" value="12000"></label>
-    <label>Durée (années) <input type="number" id="annees" value="5"></label>
-  </section>
-
-  <div class="voitures">
-    <section id="carteA">                                          <!-- 🆕 id -->
-      <div class="icone" id="iconeA">⛽</div>                       <!-- 🆕 -->
-      <h2>Voiture A</h2>
-      <label>Type                                                  <!-- 🆕 -->
-        <select id="typeA">
-          <option value="essence" selected>Essence</option>
-          <option value="diesel">Diesel</option>
-          <option value="electrique">Électrique</option>
-        </select>
-      </label>
-      <label>Prix d'achat (€) <input type="number" id="prixA" value="10000"></label>
-      <label>Consommation (L ou kWh / 100 km) <input type="number" id="consoA" value="6"></label>
-      <label>Prix de l'énergie (€ par L ou kWh) <input type="number" id="energieA" value="1.80" step="0.01"></label>
+  <main>
+    <!-- Les trajets de l'utilisateur -->
+    <section class="carte trajets">
+      <h2>🛣️ Mes trajets</h2>
+      <div class="ligne">
+        <label>Kilomètres par an <input type="number" id="km" value="12000" min="0" step="1000"></label>
+        <label>Durée (années) <input type="number" id="annees" value="5" min="1" max="20"></label>
+      </div>
     </section>
 
-    <section id="carteB">                                          <!-- 🆕 id -->
-      <div class="icone" id="iconeB">⚡</div>                       <!-- 🆕 -->
-      <h2>Voiture B</h2>
-      <label>Type                                                  <!-- 🆕 -->
-        <select id="typeB">
-          <option value="essence">Essence</option>
-          <option value="diesel">Diesel</option>
-          <option value="electrique" selected>Électrique</option>
-        </select>
-      </label>
-      <label>Prix d'achat (€) <input type="number" id="prixB" value="13000"></label>
-      <label>Consommation (L ou kWh / 100 km) <input type="number" id="consoB" value="16"></label>
-      <label>Prix de l'énergie (€ par L ou kWh) <input type="number" id="energieB" value="0.25" step="0.01"></label>
-    </section>
-  </div>
+    <!-- Les deux voitures -->
+    <div class="voitures">
+      <section class="carte voiture" id="carteA">
+        <div class="photo">
+          <img id="photoA" alt="">
+          <span class="photo-vide" id="videA">🚗</span>
+        </div>
+        <p class="credit" id="creditA"></p>
+        <h2><span id="iconeA">⛽</span> Voiture A</h2>
+        <label>Modèle <select id="modeleA"></select></label>
+        <label>Type
+          <select id="typeA">
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique">Électrique</option>
+          </select>
+        </label>
+        <label>Prix d'achat (€) <input type="number" id="prixA" value="10000" min="0" step="500"></label>
+        <label>Consommation (<span id="uniteA">L</span> / 100 km) <input type="number" id="consoA" value="5.5" min="0" step="0.1"></label>
+        <label>Prix de l'énergie (€ par <span id="unite2A">L</span>) <input type="number" id="energieA" value="1.80" min="0" step="0.01"></label>
+      </section>
 
-  <button id="calculer">Calculer</button>
-  <p id="resultat"></p>
-  <canvas id="graphique"></canvas>
+      <section class="carte voiture" id="carteB">
+        <div class="photo">
+          <img id="photoB" alt="">
+          <span class="photo-vide" id="videB">🚗</span>
+        </div>
+        <p class="credit" id="creditB"></p>
+        <h2><span id="iconeB">⚡</span> Voiture B</h2>
+        <label>Modèle <select id="modeleB"></select></label>
+        <label>Type
+          <select id="typeB">
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique" selected>Électrique</option>
+          </select>
+        </label>
+        <label>Prix d'achat (€) <input type="number" id="prixB" value="13000" min="0" step="500"></label>
+        <label>Consommation (<span id="uniteB">kWh</span> / 100 km) <input type="number" id="consoB" value="17" min="0" step="0.1"></label>
+        <label>Prix de l'énergie (€ par <span id="unite2B">kWh</span>) <input type="number" id="energieB" value="0.25" min="0" step="0.01"></label>
+      </section>
+    </div>
+
+    <!-- Le résultat -->
+    <section class="carte resultat">
+      <div id="resultat"></div>
+      <canvas id="graphique"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    Consommations et prix de l'énergie indicatifs. Photos : Wikimedia Commons (auteurs indiqués sous chaque photo).
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
